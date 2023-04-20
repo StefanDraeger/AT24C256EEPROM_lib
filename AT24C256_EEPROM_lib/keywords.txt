@@ -1,0 +1,29 @@
+#######################################
+# Read & Write Data to I2C EEPROMs
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+EEPROM		KEYWORD1
+Arduino		KEYWORD1
+AT24C256	KEYWORD1
+AT24C		KEYWORD1
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+write_byte	KEYWORD2
+write_page	KEYWORD2
+read_byte	KEYWORD2
+read_buffer	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
