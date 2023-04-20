@@ -1,7 +1,7 @@
 #include "at24c256eeprom.h"
 #include <Wire.h>
 
-#define EEPROM_I2C_ADDRESS 0x19
+#define EEPROM_I2C_ADDRESS 0x51
 
 AT24C::AT24C(){ }
 
