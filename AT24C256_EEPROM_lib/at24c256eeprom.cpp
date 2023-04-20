@@ -43,8 +43,9 @@ void AT24C::read_buffer(unsigned int eeaddress, byte *buffer, int length){
 	Wire.write((int)(eeaddress & 0xFF));  // LSB
 	Wire.endTransmission();
 	Wire.requestFrom(EEPROM_I2C_ADDRESS, length);
-	if (Wire.available()){
-		for (int c = 0; c < length; c++){
+	int c = 0;
+	for (int c = 0; c < length; c++){
+		if (Wire.available()){
 			buffer[c] = Wire.read();
 		}	
 	}	
