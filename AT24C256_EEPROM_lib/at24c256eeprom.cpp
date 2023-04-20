@@ -4,7 +4,7 @@
 int deviceAddress = 0x51;
 
 AT24C::AT24C(int i2cAddress){
-	deviceAddress = i2Address;
+	deviceAddress = i2cAddress;
 }
 
 void AT24C::write_byte(unsigned int eeaddress, byte data){
