@@ -1,13 +1,15 @@
 #include "at24c256eeprom.h"
 #include <Wire.h>
 
-#define EEPROM_I2C_ADDRESS 0x51
+int i2cAddress = 0x51;
 
-AT24C::AT24C(){ }
+AT24C::AT24C(int i2cAddress){
+	this.i2Address = i2cAddress;	
+}
 
 void AT24C::write_byte(unsigned int eeaddress, byte data){
 	int rdata = data;
-	Wire.beginTransmission(EEPROM_I2C_ADDRESS);
+	Wire.beginTransmission(i2cAddress);
 	Wire.write((int)(eeaddress >> 8));    // MSB
 	Wire.write((int)(eeaddress & 0xFF));  // LSB
 	Wire.write(rdata);
@@ -15,7 +17,7 @@ void AT24C::write_byte(unsigned int eeaddress, byte data){
 }
 
 void AT24C::write_page(unsigned int eeaddresspage, byte *data, byte length){
-	Wire.beginTransmission(EEPROM_I2C_ADDRESS);
+	Wire.beginTransmission(i2cAddress);
 	Wire.write((int)(eeaddresspage >> 8));    // MSB
 	Wire.write((int)(eeaddresspage & 0xFF));  // LSB
 	byte c;
@@ -26,11 +28,11 @@ void AT24C::write_page(unsigned int eeaddresspage, byte *data, byte length){
 }
 byte AT24C::read_byte(unsigned int eeaddress){
 	byte rdata = 0xFF;
-	Wire.beginTransmission(EEPROM_I2C_ADDRESS);
+	Wire.beginTransmission(i2cAddress);
 	Wire.write((int)(eeaddress >> 8));    // MSB
 	Wire.write((int)(eeaddress & 0xFF));  // LSB
 	Wire.endTransmission();
-	Wire.requestFrom(EEPROM_I2C_ADDRESS, 1);
+	Wire.requestFrom(i2cAddress, 1);
 	if (Wire.available()){
 		rdata = Wire.read();
 	} 
@@ -38,11 +40,11 @@ byte AT24C::read_byte(unsigned int eeaddress){
 }
 
 void AT24C::read_buffer(unsigned int eeaddress, byte *buffer, int length){
-	Wire.beginTransmission(EEPROM_I2C_ADDRESS);
+	Wire.beginTransmission(i2cAddress);
 	Wire.write((int)(eeaddress >> 8));    // MSB
 	Wire.write((int)(eeaddress & 0xFF));  // LSB
 	Wire.endTransmission();
-	Wire.requestFrom(EEPROM_I2C_ADDRESS, length);
+	Wire.requestFrom(i2cAddress, length);
 	int c = 0;
 	for (int c = 0; c < length; c++){
 		if (Wire.available()){

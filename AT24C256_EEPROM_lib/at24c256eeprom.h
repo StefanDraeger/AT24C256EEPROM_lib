@@ -5,7 +5,7 @@
 class AT24C {
   public:
 
-  AT24C();
+  AT24C(int i2cAddress);
 
   void write_byte(unsigned int eeaddress, byte data);
   void write_page(unsigned int eeaddresspage, byte *data, byte length);
